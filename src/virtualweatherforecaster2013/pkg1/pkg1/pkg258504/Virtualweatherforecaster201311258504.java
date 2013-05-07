@@ -6,7 +6,7 @@ package virtualweatherforecaster2013.pkg1.pkg1.pkg258504;
 
 /**
  *
- * @author JULIAN
+ * 
  */
 public class Virtualweatherforecaster201311258504 {
 
