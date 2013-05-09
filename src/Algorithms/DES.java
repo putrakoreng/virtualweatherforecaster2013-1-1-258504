@@ -15,9 +15,11 @@ import java.util.Locale;
 public class DES {
     
     private DEMData datas;
+    private MAPE mape;
 
     public DES() {
         datas = new DEMData();
+        mape = new MAPE();
     }
     
     public void addYt(ArrayList<Double> yt){
@@ -80,6 +82,10 @@ public class DES {
             }
         }
         return vals;
+    }
+    
+    public double getMAPE() {
+        return mape.compute(datas.getYt(), datas.getFt());
     }
     
     public String aproxDouble(double val) {
