@@ -14,7 +14,7 @@ public class MAPE {
     
     public void MAPE() {}
     
-    public double calculate(ArrayList<Double> yt, ArrayList<Double> ft) {
+    public double compute(ArrayList<Double> yt, ArrayList<Double> ft) {
         double m = 0.0;
         int n = Math.min(yt.size(), ft.size());
         

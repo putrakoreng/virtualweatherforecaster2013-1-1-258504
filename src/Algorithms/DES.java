@@ -85,7 +85,7 @@ public class DES {
     }
     
     public double getMAPE() {
-        return mape.calculate(datas.getYt(), datas.getFt());
+        return mape.compute(datas.getYt(), datas.getFt());
     }
     
     public String aproxDouble(double val) {

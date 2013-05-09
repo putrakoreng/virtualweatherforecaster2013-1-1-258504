@@ -86,7 +86,7 @@ public class SMA {
     }
     
     public double getMAPE() {
-        return mape.calculate(input, output);
+        return mape.compute(input, output);
     }
 }
 

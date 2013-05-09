@@ -56,7 +56,7 @@ public class DMA {
     }
     
     public double MAPE() {
-        return mape.calculate(input, output);
+        return mape.compute(input, output);
     }
    
 }
