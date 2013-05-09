@@ -213,13 +213,20 @@ System.out.println(holt.holtwinter(data));
 System.out.println("funciona");
 */
 
+//Des Implementation
 DES des = new DES();
     des.addYt(data);
     des.addAlpha(0.3623);
     des.addGamma(1);
     des.compute();
     jTextArea1.append("\nPredictions by DES "+des.forecast(forecastValue).toString());
+ //Finish DES implementation
     
+ //ES implementation   
+ ES es = new ES();
+ jTextArea1.append("\nPredictions by DES "+es.ESmoothing(data, forecastValue).toString());
+ //finish ES implementation
+ 
         // TODO add your handling code here:
     }//GEN-LAST:event_forecastButtonActionPerformed
 

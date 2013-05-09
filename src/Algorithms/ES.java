@@ -12,19 +12,30 @@ import java.util.ArrayList;
  */
 public class ES {
         
-    ArrayList<Double> S= new ArrayList<Double>();
-     
+    ArrayList<Double> S = new ArrayList<Double>();
+    ArrayList<Double> ESmoothing = new ArrayList<Double>();
+    double alpha = 0.5;
+    int forecastValue;
+    
+//    public ES(ArrayList<Double> ESmoothing, int forecastValue) {
+//        this.ESmoothing = ESmoothing;
+//        this.forecastValue = forecastValue;
+//    }
+//    
+    public ES() {
+        }
+    
        
-    public ArrayList<Double> ESmoothing(ArrayList <Double> input, double alpha){
+    public ArrayList<Double> ESmoothing(ArrayList <Double> input, int forecastValue){
         
-        int t= input.size();
+        //int t= input.size();
         
        //Se inicializan los arreglos para operaciones
-        S.add(1, input.get(0));
+        S.add(input.get(0));
         //Se inicializan los primeros datos del arreglo
-        for (int i=1; i<=t; i++){
+        for (int i=1; i<=forecastValue; i++){
             
-            S.add(i+1, S.get(i)+alpha*(input.get(i)-S.get(i)));
+            S.add(i+1, S.get(i)+(alpha*(input.get(i)-S.get(i))));
            
         }
                 
