@@ -204,9 +204,9 @@ try{
     JOptionPane.showMessageDialog(rootPane, "The forecast value must be a entire number", "Error", JOptionPane.ERROR_MESSAGE);
 }
 
-//if(forecastValue<5){
+if(forecastValue>=5){
 
-    //if(!data.isEmpty()){
+    if(data.size()>0){
     /*
 HoltWinters holt = new HoltWinters(data);
 System.out.println("inicia");
@@ -263,12 +263,12 @@ jTextArea1.append("\nThe forecast with the minimum MAPE Is: \n");
      
  //finish MAPE implementation
         // TODO add your handling code here:
-   // } else JOptionPane.showMessageDialog(rootPane, "The forecast value must be minimun 5", "Error", JOptionPane.ERROR_MESSAGE);
-  
-//}
-//else JOptionPane.showMessageDialog(rootPane, "There's no weather data to forecast!", "Error", JOptionPane.ERROR_MESSAGE);
-   
     
+}
+else JOptionPane.showMessageDialog(rootPane, "There's no weather data to forecast!", "Error", JOptionPane.ERROR_MESSAGE);
+   
+} else JOptionPane.showMessageDialog(rootPane, "The forecast value must be minimun 5", "Error", JOptionPane.ERROR_MESSAGE);
+      
     }//GEN-LAST:event_forecastButtonActionPerformed
 
     /**
