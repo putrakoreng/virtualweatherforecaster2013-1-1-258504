@@ -204,9 +204,9 @@ try{
     JOptionPane.showMessageDialog(rootPane, "The forecast value must be a entire number", "Error", JOptionPane.ERROR_MESSAGE);
 }
 
-if(forecastValue>5){
+//if(forecastValue<5){
 
-    if(!data.isEmpty()){
+    //if(!data.isEmpty()){
     /*
 HoltWinters holt = new HoltWinters(data);
 System.out.println("inicia");
@@ -236,11 +236,37 @@ DES des = new DES();
  DMA dma = new DMA(data, forecastValue);
  jTextArea1.append("\nPredictions by DMA "+dma.computeDMA());
  //finish SMA implementation
+ //Mape implementation
+ 
+ double DESmape = des.getMAPE();
+ double ESmape = es.getMAPE();
+ double DMAmape = dma.getMAPE();
+ double SMAmape = sma.getMAPE();
+ 
+ double mn = Math.min(dma.getMAPE(), sma.getMAPE());
+ mn = Math.min(mn, es.getMAPE());
+ mn = Math.min(mn, des.getMAPE());
+ 
+jTextArea1.append("\nThe forecast with the minimum MAPE Is: \n");
+ 
+         if(mn==DESmape){
+     jTextArea1.append("Forecast by DES: "+des.forecast(forecastValue).toString());
+ }
+ else if(mn == ESmape){
+     jTextArea1.append("Forecast by ES: "+es.ESmoothing(data, forecastValue).toString());
+ }
+ else if(mn ==DMAmape){
+     jTextArea1.append("Forecast by ES: "+dma.computeDMA());
+     
+ }else jTextArea1.append("Forecast by ES: "+sma.computeSMA());
+     
+     
+ //finish MAPE implementation
         // TODO add your handling code here:
-    } else JOptionPane.showMessageDialog(rootPane, "The forecast value must be minimun 5", "Error", JOptionPane.ERROR_MESSAGE);
+   // } else JOptionPane.showMessageDialog(rootPane, "The forecast value must be minimun 5", "Error", JOptionPane.ERROR_MESSAGE);
   
-}
-else JOptionPane.showMessageDialog(rootPane, "There's no weather data to forecast!", "Error", JOptionPane.ERROR_MESSAGE);
+//}
+//else JOptionPane.showMessageDialog(rootPane, "There's no weather data to forecast!", "Error", JOptionPane.ERROR_MESSAGE);
    
     
     }//GEN-LAST:event_forecastButtonActionPerformed

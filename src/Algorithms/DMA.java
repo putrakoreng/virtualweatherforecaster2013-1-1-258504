@@ -55,7 +55,7 @@ public class DMA {
         return output;
     }
     
-    public double MAPE() {
+    public double getMAPE() {
         return mape.compute(input, output);
     }
    

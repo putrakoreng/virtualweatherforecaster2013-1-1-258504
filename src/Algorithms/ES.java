@@ -45,7 +45,7 @@ public class ES {
         return S;
     }
     
-    public double getMape() {
+    public double getMAPE() {
         return mape.compute(inp, S);
     }
     
