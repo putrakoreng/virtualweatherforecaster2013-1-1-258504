@@ -19,6 +19,7 @@ public class SMA {
 
     private ArrayList<Double> smaArray;
     private ArrayList<Double> output;
+    private MAPE mape;
 
     public SMA(ArrayList<Double> input, int m) {
         this.input = input;
@@ -26,6 +27,7 @@ public class SMA {
         this.m = m;
         smaArray = new ArrayList<Double>();
         output = new ArrayList<Double>();
+        mape = new MAPE();
     }
 
      /**
@@ -81,6 +83,10 @@ public class SMA {
 
     public ArrayList<Double> getOutput() {
         return output;
+    }
+    
+    public double getMAPE() {
+        return mape.calculate(input, output);
     }
 }
 
