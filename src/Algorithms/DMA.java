@@ -18,7 +18,6 @@ public class DMA {
     private int n;
     private int m; // Number of days to forecast
     private static int DIV = 5;
-    private MAPE mape;
 
     public DMA(ArrayList<Double> input, int m) {
         this.input = input;
@@ -28,7 +27,6 @@ public class DMA {
         
         SMA firstSma = new SMA(input,m);
         firstSmaArray = firstSma.computeSMA();
-        mape = new MAPE();
     }
     
     public ArrayList<Double> computeDMA(){
@@ -53,10 +51,6 @@ public class DMA {
 
     public ArrayList<Double> getOutput() {
         return output;
-    }
-    
-    public double MAPE() {
-        return mape.calculate(input, output);
     }
    
 }
