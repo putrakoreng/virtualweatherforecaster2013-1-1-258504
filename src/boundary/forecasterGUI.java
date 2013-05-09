@@ -231,6 +231,10 @@ DES des = new DES();
  SMA sma = new SMA(data, forecastValue);
  jTextArea1.append("\nPredictions by SMA "+sma.computeSMA());
  //finish SMA implementation
+  // SMA implementation
+ DMA dma = new DMA(data, forecastValue);
+ jTextArea1.append("\nPredictions by DMA "+dma.computeDMA());
+ //finish SMA implementation
         // TODO add your handling code here:
     }//GEN-LAST:event_forecastButtonActionPerformed
 
