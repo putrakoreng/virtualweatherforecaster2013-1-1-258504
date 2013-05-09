@@ -6,6 +6,7 @@ package Algorithms;
 
 import Entity.DEMData;
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  *
@@ -19,15 +20,8 @@ public class DES {
         datas = new DEMData();
     }
     
-    public void addYt(double yt){
-        datas.getYt().add(yt);
-    }
-    
-    public void addFt(double st){
-        datas.getSt().add(st);
-    }
-    public void addBt(double bt){
-        datas.getBt().add(bt);
+    public void addYt(ArrayList<Double> yt){
+        datas.setYt(yt);
     }
     
     public void addAlpha(double alpha){
@@ -66,10 +60,11 @@ public class DES {
         }
     }
       
-    public void forecast(int numPers) {
+    public ArrayList<String> forecast(int numPers) {
         ArrayList<Double> ft = datas.getFt();
         ArrayList<Double> bt = datas.getBt();
         ArrayList<Double> st = datas.getSt();
+        ArrayList<String> vals = new ArrayList<String>();
         
         int n = st.size();
         
@@ -80,9 +75,14 @@ public class DES {
             ft.clear();
             for(int i = 1; i <= numPers;++i) {
                 ft.add(stult + (btult * i));
-                
-                System.out.println("Ft " + i + ": " + ft.get(i - 1));
+                vals.add(aproxDouble(ft.get(i -1)));
+                System.out.println("Ft " + i + ": " + aproxDouble(ft.get(i -1)));
             }
         }
+        return vals;
+    }
+    
+    public String aproxDouble(double val) {
+        return String.format(Locale.UK, "%.2f", val);
     }
 }

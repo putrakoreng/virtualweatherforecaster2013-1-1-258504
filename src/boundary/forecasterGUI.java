@@ -4,17 +4,30 @@
  */
 package boundary;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import Algorithms.*;
+import sun.security.krb5.internal.crypto.Des;
 /**
  *
- * @author JULIAN
+ * @author Daniel
  */
 public class forecasterGUI extends javax.swing.JFrame {
 
     /**
      * Creates new form forecasterGUI
      */
+    
+    ArrayList<Double> data = new ArrayList<Double>();
+    int forecastValue;
+  
+    
     public forecasterGUI() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        forecastTextField.setText("5");
+        weatherTextField.setText("Input weather value");
+        
     }
 
     /**
@@ -27,13 +40,13 @@ public class forecasterGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        singleValueTF = new javax.swing.JTextField();
+        weatherTextField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        valuesTF = new javax.swing.JTextField();
-        addB = new javax.swing.JButton();
-        deleteLastB = new javax.swing.JButton();
-        deleteAllB = new javax.swing.JButton();
-        forecastB = new javax.swing.JButton();
+        forecastTextField = new javax.swing.JTextField();
+        addWeaterButton = new javax.swing.JButton();
+        deleteLastWeatherButton = new javax.swing.JButton();
+        deleteAllWeatherButton = new javax.swing.JButton();
+        forecastButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
 
@@ -42,38 +55,51 @@ public class forecasterGUI extends javax.swing.JFrame {
 
         jLabel1.setText("Values to forecast");
 
-        singleValueTF.setText("Input weather value");
-        singleValueTF.addActionListener(new java.awt.event.ActionListener() {
+        weatherTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                singleValueTFActionPerformed(evt);
+                weatherTextFieldActionPerformed(evt);
             }
         });
 
         jLabel2.setText("Weather report");
 
-        valuesTF.setText("0");
-        valuesTF.addActionListener(new java.awt.event.ActionListener() {
+        forecastTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                valuesTFActionPerformed(evt);
+                forecastTextFieldActionPerformed(evt);
             }
         });
 
-        addB.setText("Add");
-        addB.addActionListener(new java.awt.event.ActionListener() {
+        addWeaterButton.setText("Add");
+        addWeaterButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addBActionPerformed(evt);
+                addWeaterButtonActionPerformed(evt);
             }
         });
 
-        deleteLastB.setText("Delete Last");
+        deleteLastWeatherButton.setText("Delete Last");
+        deleteLastWeatherButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteLastWeatherButtonActionPerformed(evt);
+            }
+        });
 
-        deleteAllB.setText("Delete All");
+        deleteAllWeatherButton.setText("Delete All");
+        deleteAllWeatherButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteAllWeatherButtonActionPerformed(evt);
+            }
+        });
 
-        forecastB.setText("Forecast");
+        forecastButton.setText("Forecast");
+        forecastButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                forecastButtonActionPerformed(evt);
+            }
+        });
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
-        jTextArea1.setText("Current data:");
+        jTextArea1.setText("Current data:\n");
         jScrollPane1.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -82,26 +108,27 @@ public class forecasterGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(202, 202, 202)
-                        .addComponent(forecastB))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(addB)
+                        .addGap(25, 25, 25)
+                        .addComponent(addWeaterButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(deleteLastB)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(deleteAllB))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(deleteLastWeatherButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(deleteAllWeatherButton)
+                        .addGap(0, 21, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(forecastButton))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2))
                         .addGap(38, 38, 38)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(singleValueTF)
-                            .addComponent(valuesTF))))
+                            .addComponent(weatherTextField)
+                            .addComponent(forecastTextField)))
+                    .addComponent(jScrollPane1))
                 .addGap(27, 27, 27))
         );
         layout.setVerticalGroup(
@@ -109,38 +136,92 @@ public class forecasterGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(singleValueTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(weatherTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(valuesTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(forecastTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addB)
-                    .addComponent(deleteLastB)
-                    .addComponent(deleteAllB))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(forecastB)
+                    .addComponent(addWeaterButton)
+                    .addComponent(deleteLastWeatherButton)
+                    .addComponent(deleteAllWeatherButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(forecastButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void singleValueTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_singleValueTFActionPerformed
+    private void weatherTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_weatherTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_singleValueTFActionPerformed
+    }//GEN-LAST:event_weatherTextFieldActionPerformed
 
-    private void valuesTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valuesTFActionPerformed
+    private void forecastTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forecastTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_valuesTFActionPerformed
+    }//GEN-LAST:event_forecastTextFieldActionPerformed
 
-    private void addBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBActionPerformed
+    private void addWeaterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addWeaterButtonActionPerformed
+try{
+        jTextArea1.setText("");
+        data.add(Double.parseDouble(weatherTextField.getText().toString()));
+        jTextArea1.append("Datos Actuales: "+data);
+        System.out.println(data);
+    
+}catch(Exception e){
+    JOptionPane.showMessageDialog(rootPane, "The weather data must be a number", "Error", JOptionPane.ERROR_MESSAGE);
+}
+
+       // jTextArea1.append(singleValueTF.getText()+"\n");
         // TODO add your handling code here:
-    }//GEN-LAST:event_addBActionPerformed
+    }//GEN-LAST:event_addWeaterButtonActionPerformed
+
+    private void deleteLastWeatherButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteLastWeatherButtonActionPerformed
+
+        jTextArea1.setText("");
+        data.remove(data.size()-1);
+        jTextArea1.append("Datos Actuales: "+data);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteLastWeatherButtonActionPerformed
+
+    private void deleteAllWeatherButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteAllWeatherButtonActionPerformed
+
+        jTextArea1.setText("");
+        data.clear();
+        jTextArea1.append("Datos Actuales: [Vacio]");
+        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteAllWeatherButtonActionPerformed
+
+    private void forecastButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forecastButtonActionPerformed
+try{
+    forecastValue =Integer.parseInt(forecastTextField.getText());
+    
+    
+}catch(Exception e){
+    JOptionPane.showMessageDialog(rootPane, "The forecast value must be a entire number", "Error", JOptionPane.ERROR_MESSAGE);
+
+}
+/*
+HoltWinters holt = new HoltWinters(data);
+System.out.println("inicia");
+System.out.println(holt.holtwinter(data));
+System.out.println("funciona");
+*/
+
+DES des = new DES();
+    des.addYt(data);
+    des.addAlpha(0.3623);
+    des.addGamma(1);
+    des.compute();
+    jTextArea1.append("\nPredictions by DES "+des.forecast(forecastValue).toString());
+    
+        // TODO add your handling code here:
+    }//GEN-LAST:event_forecastButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -177,15 +258,15 @@ public class forecasterGUI extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addB;
-    private javax.swing.JButton deleteAllB;
-    private javax.swing.JButton deleteLastB;
-    private javax.swing.JButton forecastB;
+    private javax.swing.JButton addWeaterButton;
+    private javax.swing.JButton deleteAllWeatherButton;
+    private javax.swing.JButton deleteLastWeatherButton;
+    private javax.swing.JButton forecastButton;
+    private javax.swing.JTextField forecastTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField singleValueTF;
-    private javax.swing.JTextField valuesTF;
+    private javax.swing.JTextField weatherTextField;
     // End of variables declaration//GEN-END:variables
 }
