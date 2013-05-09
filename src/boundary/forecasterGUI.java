@@ -224,9 +224,13 @@ DES des = new DES();
     
  //ES implementation   
  ES es = new ES();
- jTextArea1.append("\nPredictions by DES "+es.ESmoothing(data, forecastValue).toString());
+ jTextArea1.append("\nPredictions by ES "+es.ESmoothing(data, forecastValue).toString());
  //finish ES implementation
  
+ // SMA implementation
+ SMA sma = new SMA(data, forecastValue);
+ jTextArea1.append("\nPredictions by SMA "+sma.computeSMA());
+ //finish SMA implementation
         // TODO add your handling code here:
     }//GEN-LAST:event_forecastButtonActionPerformed
 

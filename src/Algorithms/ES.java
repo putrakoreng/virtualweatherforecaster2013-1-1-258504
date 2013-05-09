@@ -35,10 +35,11 @@ public class ES {
         //Se inicializan los primeros datos del arreglo
         for (int i=1; i<=forecastValue; i++){
             
-            S.add(i+1, S.get(i)+(alpha*(input.get(i)-S.get(i))));
-           
+            S.add(S.get(i - 1) + alpha*(input.get(i - 1) - S.get(i - 1)));
+            System.out.println(S.get(i));
         }
                 
+        S.remove(0);
         return S;
     }
     
