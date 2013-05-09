@@ -200,13 +200,14 @@ try{
     private void forecastButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forecastButtonActionPerformed
 try{
     forecastValue =Integer.parseInt(forecastTextField.getText());
-    
-    
 }catch(Exception e){
     JOptionPane.showMessageDialog(rootPane, "The forecast value must be a entire number", "Error", JOptionPane.ERROR_MESSAGE);
-
 }
-/*
+
+if(forecastValue>5){
+
+    if(!data.isEmpty()){
+    /*
 HoltWinters holt = new HoltWinters(data);
 System.out.println("inicia");
 System.out.println(holt.holtwinter(data));
@@ -236,6 +237,12 @@ DES des = new DES();
  jTextArea1.append("\nPredictions by DMA "+dma.computeDMA());
  //finish SMA implementation
         // TODO add your handling code here:
+    } else JOptionPane.showMessageDialog(rootPane, "The forecast value must be minimun 5", "Error", JOptionPane.ERROR_MESSAGE);
+  
+}
+else JOptionPane.showMessageDialog(rootPane, "There's no weather data to forecast!", "Error", JOptionPane.ERROR_MESSAGE);
+   
+    
     }//GEN-LAST:event_forecastButtonActionPerformed
 
     /**

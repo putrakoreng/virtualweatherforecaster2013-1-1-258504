@@ -61,16 +61,16 @@ public class SMA {
                 output.add(n+i, smaArray.get(i));
             }
         }
-        
-        System.out.print("smarray: ");
-        for(int i=0; i<smaArray.size(); i++){
-            System.out.print(smaArray.get(i) +" ");
-        }
-        
-        System.out.print("aux: ");
-        for(int i=0; i<output.size(); i++){
-            System.out.print(output.get(i) +" ");
-        }
+//        
+//        System.out.print("smarray: ");
+//        for(int i=0; i<smaArray.size(); i++){
+//            System.out.print(smaArray.get(i) +" ");
+//        }
+//        
+//        System.out.print("aux: ");
+//        for(int i=0; i<output.size(); i++){
+//            System.out.print(output.get(i) +" ");
+//        }
         
         return smaArray;
     }
